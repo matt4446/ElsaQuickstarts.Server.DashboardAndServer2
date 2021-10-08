@@ -68,7 +68,7 @@ namespace ElsaQuickstarts.Server.DashboardAndServer2.Services
 			this.logger.LogInformation("Person A created some work. Approve: {input}", input);
 
 			var workflowRunner = this.scope.ServiceProvider.GetRequiredService<IBuildsAndStartsWorkflow>();
-			var result = await workflowRunner.BuildAndStartWorkflowAsync<Workflows.TestInputApprovalWorkflow>(input: new Elsa.Models.WorkflowInput(input));
+			var result = await workflowRunner.BuildAndStartWorkflowAsync<Workflows.TestInputApprovalWorkflow>(input: new Elsa.Models.WorkflowInput(input), correlationId: $"{DateTime.UtcNow:u}");
 
 			this.logger.LogInformation("Created some test work. Items {@workflowResult}", result);
 

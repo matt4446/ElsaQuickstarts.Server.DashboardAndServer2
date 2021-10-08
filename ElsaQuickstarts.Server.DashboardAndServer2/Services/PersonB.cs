@@ -55,7 +55,11 @@ namespace ElsaQuickstarts.Server.DashboardAndServer2.Services
 
 			if (first is not null) 
 			{
-				Bookmarks.InputApprovalBookmark bookmark = first.Bookmark as Bookmarks.InputApprovalBookmark;
+				// now pretend we are getting it for the first time :) 
+				// works with a correlation id now. 
+				var current = (await approveInputDispatcher.FindRequiredInputs(first.CorrelationId)).ToList();
+
+				Bookmarks.InputApprovalBookmark bookmark = current.FirstOrDefault().Bookmark as Bookmarks.InputApprovalBookmark;
 				
 				
 				bookmark.Input.User = "PersonB";
